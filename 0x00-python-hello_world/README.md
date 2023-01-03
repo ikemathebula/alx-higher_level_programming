@@ -1,1 +1,1 @@
-Python is a popular, high-level programming language. It is a powerful tool to help developers create software applications quickly and efficiently. While it may seem intimidating at first, it’s fairly easy to learn and implement for most use cases. For example, the classic “Hello World” program can be written in just a few lines of code in Python.
+## 0x0-python_hello_world README.md
