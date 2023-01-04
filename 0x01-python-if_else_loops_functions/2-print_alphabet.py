@@ -1,2 +1,3 @@
 #!/usr/bin/python3
-print("".join([chr(i) for i in range(ord('a'), ord('z')+1)]))
+for ch in range(97, 123):
+    print("{:c}".format(ch), end='')
