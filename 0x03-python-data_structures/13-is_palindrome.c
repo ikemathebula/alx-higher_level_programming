@@ -1,74 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "lists.h"
-#ifndef LISTS_H
-#define LISTS_H
 
-/**
- * reverse_listint - reverses a linked list
- * @head: pointer to the first node in the list
- *
- * Return: pointer to the first node in the new list
- */
-void reverse_listint(listint_t **head)
-{
-	listint_t *prev = NULL;
-	litint_t *current = *head;
-	listint_t *next = NULL;
-
-	while (current)
-	{
-		next = current->next;
-		curent->next = prev;
-		prev = current;
-		current = next;
-	}
-
-	*head = prev;
-}
-
-/**
- * is_palindrome - checks if a linked list is a palindrome
- * @head: double pointer to the linked list
- *
- * Return: 1 if it is, 0 if not
- */
 int is_palindrome(listint_t **head)
 {
-	listint_t *slow = *head, *fast = *head, *temp = *head, *dup = NULL;
-
+	// Check for empty list or single-node list
 	if (*head == NULL || (*head)->next == NULL)
-		return (1);
+		return 1;
 
-	while (1)
+	// Find the middle of the list
+	listint_t *slow = *head, *fast = *head;
+	while (fast && fast->next)
 	{
-		fast = fast->next->next;
-		if (!fast)
-		{
-			dup = slow->next;
-			break;
-		}
-		if (!fast->next)
-		{
-			dup = slow->next->next;
-			break;
-		}
 		slow = slow->next;
+		fast = fast->next->next;
 	}
 
-	reverse_listint(&dup);
-
-	while (dup && temp)
+	// Reverse the second half of the list
+	listint_t *prev = NULL, *curr = slow, *next = slow->next;
+	while (next)
 	{
-		if (temp->n == dup->n)
-		{
-			dup = dup->next;
-			temp = temp->next;
-		}
-		else
-			return (0);
+		curr->next = prev;
+		prev = curr;
+		curr = next;
+		next = next->next;
+	}
+	curr->next = prev;
+
+	// Compare the first and second halves of the list
+	listint_t *left = *head, *right = curr;
+	while (right)
+	{
+		if (left->n != right->n)
+			return 0;
+		left = left->next;
+		right = right->next;
 	}
 
-	if (!dup)
-		return (1);
+	// Restore the original list
+	prev = NULL;
+	curr = slow;
+	next = slow->next;
+	while (next)
+	{
+		curr->next = prev;
+		prev = curr;
+		curr = next;
+		next = next->next;
+	}
+	curr->next = prev;
 
-	return (0);
+	return 1;
 }
