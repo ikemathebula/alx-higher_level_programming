@@ -1,12 +1,9 @@
 #!/usr/bin/python3
-# 4-print_square.py
-# Naheemah Bello
 """Defines a square-printing function."""
 
 
 def print_square(size):
     """Print a square with the # character.
-
     Args:
         size (int): The height/width of the square.
     Raises:
